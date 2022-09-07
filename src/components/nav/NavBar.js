@@ -12,6 +12,9 @@ export const NavBar = ({ token, setToken, setStaff }) => {
                 <Link className="navbar-link" to="/events" style={{ textDecoration: 'none' }}>
                     events
                 </Link>
+                {/* <Link className="navbar-link" to="/map" style={{ textDecoration: 'none' }}>
+                    map
+                </Link> */}
                 {adminUser === "false"
                     ? <Link className="navbar-link" to="/create-request" style={{ textDecoration: 'none' }}>
                         submit your show!
@@ -24,12 +27,12 @@ export const NavBar = ({ token, setToken, setStaff }) => {
                     </Link>
                     : <></>
                 }
-                {adminUser === "false"
+                {/* {adminUser === "false"
                     ? <Link className="navbar-link" to="/itinerary" style={{ textDecoration: 'none' }}>
                         itinerary
                     </Link>
                     : <></>
-                }
+                } */}
                 {adminUser === "true"
                     ? <Link className="navbar-link" to="/users" style={{ textDecoration: 'none' }}>
                         users

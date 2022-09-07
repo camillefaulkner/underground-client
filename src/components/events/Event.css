@@ -1,0 +1,30 @@
+.eventCard {
+    margin-top: 2rem;
+    margin-left: 4rem;
+    background-color: lightseagreen;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    border-radius: 10px;
+}
+
+.eventDetails {
+    margin-left: 4rem;
+    margin-top: 2rem;
+    background-color: lightpink;
+    padding: 2rem;
+    width: max-content;
+}
+
+.eventListContainer {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.eventright {
+    margin-left: 4rem;
+}

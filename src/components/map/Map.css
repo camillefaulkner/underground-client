@@ -1,0 +1,23 @@
+.leaflet-container {
+    /* width: 60vw; */
+    height: 60vh;
+    /* margin-left: 20%;*/
+    border-radius: 10px;
+}
+
+/* .leaflet-tile {
+    filter: hue-rotate(175deg) !important;
+}
+
+.map {
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+
+.activemarker {
+    filter: hue-rotate(180deg);
+  }
+

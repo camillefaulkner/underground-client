@@ -47,7 +47,7 @@ export const deleteEvent = (id) => {
     })
   }
 
-  export const updateEvent = (event) => {
+export const updateEvent = (event) => {
     return fetch(`http://localhost:8000/events/${event.id}`, {
         method: "PUT",
         headers: {
@@ -57,3 +57,43 @@ export const deleteEvent = (id) => {
         body: JSON.stringify(event)
     })
 }
+
+export const approveEvent = (event) => {
+    return fetch(`http://localhost:8000/events/${event.id}/approve`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("ug_token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(event)
+    })
+}
+
+
+export const getEventsByVenueArtist = (search) => {
+    return fetch(`http://localhost:8000/events?approved=True&q=${search}`, {
+      headers: {
+        'Authorization': `Token ${localStorage.getItem('ug_token')}`
+      }
+    }).then(res => res.json())
+  }
+
+
+export const getEventsByCategory = (id) => {
+    return fetch(`http://localhost:8000/events?approved=True&category=${id}`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("ug_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const getThisWeekEvents = () => {
+    return fetch(`http://localhost:8000/events/this_week?approved=True`, {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("ug_token")}`
+        }
+    })
+        .then(response => response.json())
+}
+

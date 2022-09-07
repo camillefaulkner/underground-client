@@ -1,0 +1,20 @@
+.pendingRequestContainer {
+    margin-top: 2rem;
+    margin-left: 3rem;
+}
+
+.requestform {
+    background-color: lightskyblue;
+    padding: 1rem;
+    width: max-content;
+}
+
+.artistform {
+    background-color: lightgreen;
+    padding: 1rem;
+}
+
+.venueform {
+    background-color: lightcoral;
+    padding: 1rem;
+}

@@ -55,7 +55,7 @@ export const Login = ({ setToken, setUserId }) => {
             <button className="button is-link" type="submit" >submit</button>
           </div>
           <div className="control">
-            <Link to="/register" className="button is-link is-light">cancel</Link>
+            <Link to="/register" className="button is-link is-light">register</Link>
           </div>
         </div>
         {
