@@ -1,18 +1,9 @@
-.eventCard {
-    margin-top: 2rem;
-    margin-left: 4rem;
-    background-color: lightseagreen;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    width: max-content;
-    border-radius: 10px;
-}
 
 .eventDetails {
     margin-left: 4rem;
     margin-top: 2rem;
     background-color: lightpink;
+    border-radius: 5px;
     padding: 2rem;
     width: max-content;
 }
@@ -28,3 +19,102 @@
 .eventright {
     margin-left: 4rem;
 }
+
+.checkemout {
+    margin-left: 1rem;
+}
+
+.eventeditform {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.middlerow {
+    display: flex;
+    flex-direction: row;
+    margin-left: 25%;
+}
+
+.middle {
+    margin-left: 15%;
+}
+
+.right {
+    margin-left: 12%;
+}
+
+.editpic {
+    display: flex;
+    flex-direction: column;
+    margin-left: 45%;
+}
+
+.editsave {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.eventlistblob {
+    background-color: #82b9e8;
+    border-radius:25% 75% 70% 30% / 39% 50% 50% 61%;
+    padding: 1rem;
+}
+
+.eventlistblob2 {
+    background-color: #a4bfea;
+    border-radius:25% 75% 70% 30% / 39% 50% 50% 61%;
+    padding: 1rem;
+}
+
+.artistlistitem {
+    display: flex;
+    flex-direction: row;
+}
+
+/* .eventCard {
+    margin-top: 2rem;
+    margin-left: 4rem;
+    background-color: #f0cfeb;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    border-radius: 10px;
+}
+
+.eventCard:hover {
+    background-color: #2a2a72;
+} */
+
+  
+.eventCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 20px auto;
+    width: 20rem;
+    height: 3rem;
+    background: #f0cfeb;
+    border-radius: 75px;
+    letter-spacing: 2px;
+    padding-left: 8px;
+    padding-right: 4px;
+    transition: 1s box-shadow;
+  }
+  
+  .eventCard:hover {
+    box-shadow: 0 0 15px #2a2a72;
+  }
+
+  .eventdetailscontainer {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .viz {
+    margin-left: 10%;
+  }
+  

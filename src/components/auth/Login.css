@@ -1,0 +1,32 @@
+.columns {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+.is-grouped {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+
+.registerbutton {
+    margin-left: 1.5rem;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: center;
+}
+
+.loginblob {
+    background-color: #82b9e8;
+    border-radius:25% 75% 70% 30% / 39% 50% 50% 61%;
+    padding: 1rem;
+}
+
+.loginblob2 {
+    background-color: #a4bfea;
+    border-radius:25% 75% 70% 30% / 39% 50% 50% 61%;
+    padding: 1rem;
+}

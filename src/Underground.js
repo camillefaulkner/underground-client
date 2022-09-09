@@ -5,7 +5,7 @@ import { Register } from "./components/auth/Register"
 import { NavBar } from "./components/nav/NavBar"
 import { ApplicationViews } from "./views/ApplicationViews"
 import { Authorized } from "./views/Authorized"
-
+import './App.css'
 
 export const Underground = () => {
   const [token, setTokenState] = useState(localStorage.getItem('ug_token'))
@@ -27,8 +27,12 @@ export const Underground = () => {
     setStaffState(staff)
   }
 
-  return <>
-    <NavBar token={token} setToken={setToken} setStaff={setStaff}/>
+  return <div className="underground">
+  {
+    token
+    ?<NavBar token={token} setToken={setToken} setStaff={setStaff}/>
+    :<></>
+  }
     <ApplicationViews token={token} setToken={setToken} setUserId={setUserId} userId={userId} setStaff={setStaff}/>
-  </>
+  </div>
 }

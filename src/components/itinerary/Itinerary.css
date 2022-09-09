@@ -2,3 +2,10 @@
     display: flex;
     flex-direction: column;
 }
+
+.ititem {
+    background-color: aquamarine;
+    border-radius: 10px;
+    margin: 0.5rem;
+    padding: 1rem;
+}

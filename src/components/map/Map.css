@@ -1,23 +1,28 @@
 .leaflet-container {
-    /* width: 60vw; */
+    width: 30vw;
     height: 60vh;
     /* margin-left: 20%;*/
-    border-radius: 10px;
+    border-radius:39% 61% 70% 30% / 61% 29% 71% 39%;
 }
 
-/* .leaflet-tile {
-    filter: hue-rotate(175deg) !important;
+ .leaflet-tile {
+    filter: hue-rotate(250deg) !important;
 }
 
-.map {
-    position: absolute;
-    left: 40%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-} */
+.mapblob {
+    background-color: #82b9e8;
+    border-radius:39% 61% 70% 30% / 61% 29% 71% 39%;
+    padding: 1rem;
+}
+
+.mapblob2 {
+    background-color: #a4bfea;
+    border-radius:39% 61% 70% 30% / 61% 29% 71% 39%;
+    padding: 1rem;
+}
 
 
-.activemarker {
+/* .activemarker {
     filter: hue-rotate(180deg);
-  }
+  } */
 

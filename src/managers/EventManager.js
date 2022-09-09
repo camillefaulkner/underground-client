@@ -47,6 +47,15 @@ export const deleteEvent = (id) => {
     })
   }
 
+  export const deleteArtist = (EvtId, ArtistId) => {
+    return fetch(`http://localhost:8000/events/${EvtId}/delete_artist?artist=${ArtistId}`, {
+      method: "DELETE",
+      headers: {
+        'Authorization': `Token ${localStorage.getItem('ug_token')}`
+      }
+    })
+  }
+
 export const updateEvent = (event) => {
     return fetch(`http://localhost:8000/events/${event.id}`, {
         method: "PUT",
@@ -89,7 +98,7 @@ export const getEventsByCategory = (id) => {
 }
 
 export const getThisWeekEvents = () => {
-    return fetch(`http://localhost:8000/events/this_week?approved=True`, {
+    return fetch(`http://localhost:8000/events?approved=True&this_week`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }

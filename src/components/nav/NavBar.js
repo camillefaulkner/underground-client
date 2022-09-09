@@ -8,43 +8,37 @@ export const NavBar = ({ token, setToken, setStaff }) => {
 
     return (
         <>
-            <nav>
-                <Link className="navbar-link" to="/events" style={{ textDecoration: 'none' }}>
-                    events
-                </Link>
-                {/* <Link className="navbar-link" to="/map" style={{ textDecoration: 'none' }}>
-                    map
-                </Link> */}
-                {adminUser === "false"
-                    ? <Link className="navbar-link" to="/create-request" style={{ textDecoration: 'none' }}>
-                        submit your show!
+            <div className='top'>
+
+                <nav className='nav'>
+                    <Link className="navbar-link" id="eventnav" to="/events" style={{ textDecoration: 'none' }}>
+                        events
                     </Link>
-                    : <></>
-                }
-                {adminUser === "true"
-                    ? <Link className="navbar-link" to="/view-requests" style={{ textDecoration: 'none' }}>
-                        view requests
-                    </Link>
-                    : <></>
-                }
-                {/* {adminUser === "false"
-                    ? <Link className="navbar-link" to="/itinerary" style={{ textDecoration: 'none' }}>
-                        itinerary
-                    </Link>
-                    : <></>
-                } */}
-                {adminUser === "true"
-                    ? <Link className="navbar-link" to="/users" style={{ textDecoration: 'none' }}>
-                        users
-                    </Link>
-                    : <></>
-                }
-                <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    setStaff('')
-                    navigate('/login')
-                }}>Logout</button>
-            </nav>
+                    {adminUser === "false"
+                        ? <Link className="navbar-link" id="submitnav" to="/create-request" style={{ textDecoration: 'none' }}>
+                            submit your show!
+                        </Link>
+                        : <></>
+                    }
+                    {adminUser === "true"
+                        ? <Link className="navbar-link" id="requestnav" to="/view-requests" style={{ textDecoration: 'none' }}>
+                            view requests
+                        </Link>
+                        : <></>
+                    }
+                    {adminUser === "true"
+                        ? <Link className="navbar-link" id="usernav" to="/users" style={{ textDecoration: 'none' }}>
+                            users
+                        </Link>
+                        : <></>
+                    }
+                    <Link className="navbar-link" id="logoutnav" to="/login" style={{ textDecoration: 'none' }} onClick={() => {
+                        setToken('')
+                        setStaff('')
+                        localStorage.clear()
+                    }}>logout</Link>
+                </nav>
+            </div>
         </>
     )
 }

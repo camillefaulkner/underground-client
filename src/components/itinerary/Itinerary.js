@@ -27,12 +27,14 @@ export const Itinerary = ({ selectionState, setSelectionState }) => {
                         <h3>saved selections</h3>
                         {
                             events.sort((a, b) => { return new Date(a.event.date) - new Date(b.event.date) }).map(e => {
-                                // if (e.event.date >= earliestDate.toString()) {
-                                return <>{ConvertDate(e.event.date)} - {e.event.name} - {ConvertTime(e.event.time)} - <button onClick={() => {
+                                return <div className="ititem">{ConvertDate(e.event.date)} - {e.event.name} - {ConvertTime(e.event.time)}
+                                <button>more details</button>
+                                <button onClick={() => {
                                     deleteSelection(e.id)
-                                        .then(() => getAllSelectionsByUser(currentUserId).then((showArray) => { setEvents(showArray) }).then(() => setSelectionState(events)))
-                                }}>delete</button><br /></>
-                                // }
+                                        .then(() => getAllSelectionsByUser(currentUserId).then((showArray) => { setEvents(showArray) 
+                                            setSelectionState(showArray)
+                                        }))
+                                }}>delete</button><br /></div>
                             })
                         }
                     </>

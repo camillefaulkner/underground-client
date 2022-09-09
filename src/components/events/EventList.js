@@ -23,9 +23,9 @@ export const EventList = ({ selectionState, setSelectionState }) => {
     useEffect(
         () => {
             getApprovedEvents().then((evtArray) => { setEvents(evtArray) })
-            getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) })
+            getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelectionState(selectionArray) })
             getAllCategories().then((catArray) => { setCat(catArray) })
-        }, [selectionState]
+        }, []
     )
 
     useEffect(
@@ -55,36 +55,44 @@ export const EventList = ({ selectionState, setSelectionState }) => {
         [chosenCategory, events]
     )
 
-    return <>
-        <div>
-            <div className="searchBar">
-                <input
-                    type="text"
-                    placeholder="search by venue or artist or event name ..."
-                    onChange={
-                        (changeEvent) => {
-                            let search = changeEvent.target.value
-                            setSearchTerms(search)
-                        }
-                    }
-                />
-            </div>
-            <select className="categoryFilter" onChange={(event) => {
-                let chosenCategory = event.target.value
-                setChosenCategory(parseInt(chosenCategory))
-            }}>
-                <option value="0">Search by Category...</option>
-                {cat.map(category => {
-                    return <option value={`${category.id}`}>{category.category}</option>
-                })}
-            </select><br />
-            <button onClick={(clickEvent) => {
-                getThisWeekEvents().then((evtArray) => { setFiltered(evtArray) })
-            }}>view just week's worth</button>
-            <button onClick={(clickEvent) => {
-                getApprovedEvents().then((evtArray) => { setFiltered(evtArray) })
-                setShowMap(false)
-            }}>all events</button>
+    return <div style={{background:showMap  ? "none" : "#82b9e8"}} className="eventlistblob">
+        <div style={{background:showMap  ? "none" : "#a4bfea"}} className="eventlistblob2">
+            {
+                showMap === false
+                    ? <>
+                        <div className="searchBar">
+                            <input
+                                type="text"
+                                placeholder="search by venue or artist or event name ..."
+                                onChange={
+                                    (changeEvent) => {
+                                        let search = changeEvent.target.value
+                                        setSearchTerms(search)
+                                    }
+                                }
+                            />
+                        </div>
+                        <select className="categoryFilter" onChange={(event) => {
+                            let chosenCategory = event.target.value
+                            setChosenCategory(parseInt(chosenCategory))
+                        }}>
+                            <option value="0">Search by Category...</option>
+                            {cat.map(category => {
+                                return <option value={`${category.id}`}>{category.category}</option>
+                            })}
+                        </select><br />
+                        <button onClick={(clickEvent) => {
+                            getThisWeekEvents().then((evtArray) => { setFiltered(evtArray) })
+                        }}>view just week's worth</button>
+                        <button onClick={(clickEvent) => {
+                            getApprovedEvents().then((evtArray) => { setFiltered(evtArray) })
+                        }}>all events</button>
+                    </>
+                    : <button onClick={(clickEvent) => {
+                        setShowMap(false)
+                    }}>event list </button>
+
+            }
             <button onClick={(clickEvent) => {
                 setShowMap(!showMap)
             }}>map view</button>
@@ -94,37 +102,50 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                     <ul>
                         {
                             filteredEvents.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(evt => {
-                                return <li className="eventCard" draggable="true">
-                                    {
-                                        evt.image !== null
-                                            ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
-                                            : <></>
-                                    }
-                                    <Link to={`/events/${evt.id}`}> {ConvertDate(evt.date)} - {evt.name} - {evt.venue.name}</Link>
-                                    {
-                                        adminUser === "false"
-                                            ? <>
+                                return <div class="container">
+                                    <div class="product">
+                                        <div class="effect-1"></div>
+                                        <div class="effect-2"></div>
+                                        <div class="content">
+
+                                            <li className="eventCard" draggable="true">
                                                 {
-                                                    selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
-                                                        ? <button onClick={(clickEvent) => {
-                                                            clickEvent.preventDefault()
-                                                            saveNewSelection({
-                                                                event: evt.id,
-                                                                user: currentUserId
-                                                            }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) }).then(() => setSelectionState(selections)))
-                                                        }}>add</button>
-                                                        : <>
-                                                        </>
+                                                    evt.image !== null
+                                                        ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
+                                                        : <></>
                                                 }
-                                            </>
-                                            : <></>
-                                    }
-                                </li>
+                                                <Link to={`/events/${evt.id}`} style={{ textDecoration: 'none' }}> {ConvertDate(evt.date)} - {evt.name} - {evt.venue.name}</Link>
+                                                {
+                                                    adminUser === "false"
+                                                        ? <>
+                                                            {
+                                                                selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
+                                                                    ? <button onClick={(clickEvent) => {
+                                                                        clickEvent.preventDefault()
+                                                                        saveNewSelection({
+                                                                            event: evt.id,
+                                                                            user: currentUserId
+                                                                        }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) }).then(() => setSelectionState(selections)))
+                                                                    }}>add</button>
+                                                                    : <>
+                                                                    </>
+                                                            }
+                                                        </>
+                                                        : <></>
+                                                }
+                                            </li>
+
+                                            <div class="exercise"></div>
+                                        </div>
+                                        <span class="title">
+                                        </span>
+                                    </div>
+                                </div>
                             })
                         }
                     </ul>
-                    : <> < Map adminUser={adminUser} selections={selections} saveNewSelection={saveNewSelection} currentUserId={currentUserId} setSelectionState={setSelectionState} setSelections={setSelections} getAllSelectionsByUser={getAllSelectionsByUser}/></>
+                    : <> < Map adminUser={adminUser} selections={selectionState} saveNewSelection={saveNewSelection} currentUserId={currentUserId} selectionState={selectionState} setSelectionState={setSelectionState} setSelections={setSelectionState} getAllSelectionsByUser={getAllSelectionsByUser} /></>
             }
         </div>
-    </>
+    </div>
 }
