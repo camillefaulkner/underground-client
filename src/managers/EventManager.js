@@ -57,7 +57,7 @@ export const deleteEvent = (id) => {
   }
 
 export const updateEvent = (event) => {
-    return fetch(`http://localhost:8000/events/${event.id}`, {
+    return fetch(`http://localhost:8000/events/${event.evt.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,

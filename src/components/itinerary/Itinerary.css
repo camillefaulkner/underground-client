@@ -1,6 +1,16 @@
 .itinerarylist {
     display: flex;
     flex-direction: column;
+    /* background-color: blueviolet;  */
+    padding: 1rem;
+    border-radius:66% 34% 33% 67% / 65% 73% 27% 35%;
+    max-width: 40rem;
+}
+
+.itinerarylist2 {
+    /* background-color: #a4bfea; */
+    padding: 1rem;
+    border-radius:66% 34% 33% 67% / 65% 73% 27% 35%;
 }
 
 .ititem {
@@ -9,3 +19,4 @@
     margin: 0.5rem;
     padding: 1rem;
 }
+

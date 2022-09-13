@@ -52,12 +52,12 @@ export const EventEdit = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        // const dataToBeSaved = {
-        //     venue: { ...venue },
-        //     evt: { ...evt },
-        //     artists: [...artistList]
-        // }
-        updateEvent(evt).then(() => navigate(`/events/${evtId}`))
+        const dataToBeSaved = {
+            venue: { ...venue },
+            evt: { ...evt },
+            artists: [...artistList] 
+        }
+        updateEvent(dataToBeSaved).then(() => navigate(`/events/${evtId}`))
     }
 
     // const handleArtistSubmit = () => {

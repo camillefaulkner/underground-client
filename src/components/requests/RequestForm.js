@@ -14,7 +14,7 @@ export const RequestForm = () => {
     const currentUserId = parseInt(localStorage.getItem('user_id'))
     const [cat, setCat] = useState([])
     const [artistForm, setArtistForm] = useState(false)
-    const [venueForm, setVenueForm] = useState(false)
+    // const [venueForm, setVenueForm] = useState(true)
     const [venueName, setVenueName] = useState("")
     const [venue, setVenue] = useState({
         private: false,
@@ -29,7 +29,7 @@ export const RequestForm = () => {
         () => {
             getCategories()
             setArtistForm(false)
-            setVenueForm(false)
+            // setVenueForm(false)
         }, []
     )
 
@@ -50,13 +50,17 @@ export const RequestForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const dataToBeSaved = {
-            venue: { ...venue },
-            evt: { ...evt },
-            artists: [...artistList]
+        if (venue.name === undefined || venue.address === undefined || evt.title === undefined || evt.date === undefined || evt.time === undefined || evt.description === undefined) {
+            window.alert("please fill out required fields")
+        } else {
+            const dataToBeSaved = {
+                venue: { ...venue },
+                evt: { ...evt },
+                artists: [...artistList]
+            }
+            saveNewEvent(dataToBeSaved)
+            navigate("/success-request")
         }
-        saveNewEvent(dataToBeSaved)
-        navigate("/success-request")
     }
 
     const handleChange = (event) => {
@@ -66,71 +70,94 @@ export const RequestForm = () => {
     }
 
     return <>
-        <h2 className="panel-heading">request event</h2>
-        <h3>rules: be cool. give 24 hours for admin to approve.</h3>
-        <div className="requestform">
-            <form style={{ width: "100%" }}>
-                {
-                    preview
-                        ? <img src={preview} style={{ width: '100px' }} />
-                        : <></>
-                }
-                <div className="field">
-                    <label htmlFor="image_url" className="label">upload event photo: </label>
-                    <div className="url-header">
-                        <input type="file" id="url_image" onChange={createUrlImageString} />
-                        <input type="hidden" name="image" value={evt.id} />
-                    </div>
+        <div className="divrow">
+
+            <div className="container1">
+                <h2 className="panel-heading">request event</h2>
+                <h4>may take up to 24 hours for admin to approve. * indicates required fields</h4>
+                <hr></hr>
+                <h3>what</h3>
+                <div className="requestform">
+                    <form style={{ width: "100%" }}>
+                        {
+                            preview
+                                ? <img src={preview} style={{ width: '100px' }} />
+                                : <></>
+                        }
+                        <div className="field">
+                            <label htmlFor="image_url" className="label">upload event photo: </label>
+                            <div className="url-header">
+                                <input type="file" id="url_image" onChange={createUrlImageString} />
+                                <input type="hidden" name="image" value={evt.id} />
+                            </div>
+                        </div>
+                        <br />
+                        <div className="field">
+                            <label htmlFor="title" className="label">title: </label>
+                            <div className="control">
+                                <input type="text" name="name" required className="input"
+                                    placeholder="title"
+                                    value={evt.name}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <br />
+                        <div className="field">
+                            <label htmlFor="title" className="label">date: </label>
+                            <div className="control">
+                                <input type="date" name="date" required className="input"
+                                    placeholder="Title"
+                                    value={evt.date}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <br />
+                        <div className="field">
+                            <label htmlFor="title" className="label">time of event: </label>
+                            <div className="control">
+                                <input type="time" name="time" required className="input"
+                                    placeholder="Title"
+                                    value={evt.time}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div className="field">
+                            <label htmlFor="content" className="label">event description: </label>
+                            <div className="control">
+                                <div className="control">
+                                    <textarea
+                                        className="textarea"
+                                        name="description"
+                                        value={evt.description}
+                                        onChange={handleChange}
+                                    ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </form>
                 </div>
-                <br />
-                <div className="field">
-                    <label htmlFor="title" className="label">title: </label>
-                    <div className="control">
-                        <input type="text" name="name" required className="input"
-                            placeholder="title"
-                            value={evt.name}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-                <br />
-                <div className="field">
-                    <label htmlFor="title" className="label">date: </label>
-                    <div className="control">
-                        <input type="date" name="date" required className="input"
-                            placeholder="Title"
-                            value={evt.date}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-                <br />
-                <div className="field">
-                    <label htmlFor="title" className="label">time of event: </label>
-                    <div className="control">
-                        <input type="time" name="time" required className="input"
-                            placeholder="Title"
-                            value={evt.time}
-                            onChange={handleChange}
-                        />
-                    </div>
-                </div>
-                <br />
+            </div>
+
+
+            <div className="container2">
                 {
                     venueName !== ""
                         ? <>{venueName}<br /></>
                         : <></>
                 }
-                <button onClick={(clickEvent) => {
-                    clickEvent.preventDefault()
-                    setVenueForm(!venueForm)
-                }}>add the venue +</button>
-                {
-                    venueForm === true
-                        ? <><VenueForm venue={venue} setVenue={setVenue} cat={cat} setVenueName={setVenueName} venueForm={venueForm} setVenueForm={setVenueForm} getCategories={getCategories}/></>
-                        : <></>
-                }
 
+                <VenueForm venue={venue} setVenue={setVenue} cat={cat} setVenueName={setVenueName} getCategories={getCategories} />
+
+            </div>
+
+
+            <div className="container3">
+                <h3>who</h3>
                 <ul>
                     {
                         artistList.length
@@ -157,31 +184,29 @@ export const RequestForm = () => {
                         </>
                         : <></>
                 }
-                <br /><br />
-                <div className="field">
-                    <label htmlFor="content" className="label">event description: </label>
-                    <div className="control">
-                        <div className="control">
-                            <textarea
-                                className="textarea"
-                                name="description"
-                                value={evt.description}
-                                onChange={handleChange}
-                            ></textarea>
-                        </div>
-                    </div>
+            </div>
+        </div>
+
+
+        <div className="container4">
+            <div className="field">
+                <div className="control">
+                    {/* <nav>
+                        <ul>
+                            <li onClick={handleSubmit}>
+                                save
+                                <span></span><span></span><span></span><span></span>
+                            </li>
+                        </ul>
+                    </nav> */}
+                    <button type="submit"
+                        onClick={handleSubmit}
+                        className="rainbow rainbow-1">
+                        save
+                    </button>
+
                 </div>
-                <br />
-                <div className="field">
-                    <div className="control">
-                        <button type="submit"
-                            onClick={handleSubmit}
-                            className="button is-link">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </>
 }

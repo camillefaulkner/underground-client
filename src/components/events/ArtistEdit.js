@@ -58,7 +58,7 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                                 setShowArtistForm(false)
                                 if (al.id !== "undefined") {
                                     if (showArtistEdit === 0) {
-                                        setShowArtistEdit(al.id).then()
+                                        setShowArtistEdit(al.id)
                                     } else {
                                         setShowArtistEdit(0)
                                     }
@@ -86,7 +86,7 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
 
         {
             showArtistForm === true
-                ? <ArtistForm setArtistList={setArtistList} artistList={artistList} setArtistForm={setShowArtistForm} artistForm={showArtistForm}/>
+                ? <ArtistForm fetchCalls={fetchCalls} setArtistList={setArtistList} artistList={artistList} setArtistForm={setShowArtistForm} evtId={evtId} artistForm={showArtistForm}/>
                 : <></>
         }
 
@@ -102,7 +102,7 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                         <label htmlFor="title" className="label">name: </label>
                         <div className="control">
                             <input type="text" name="name" required className="input"
-                                placeholder="title"
+                                placeholder="name"
                                 value={artist.name}
                                 onChange={handleArtistChange}
                             />
@@ -112,7 +112,7 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                         <label htmlFor="title" className="label">social: </label>
                         <div className="control">
                             <input type="text" name="social" className="input"
-                                placeholder="title"
+                                placeholder="social"
                                 value={artist?.social}
                                 onChange={handleArtistChange}
                             />
@@ -122,7 +122,7 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                         <label htmlFor="title" className="label">spotify URI: </label>
                         <div className="control">
                             <input type="text" name="spotify" className="input"
-                                placeholder="title"
+                                placeholder="spotify uri"
                                 value={artist?.spotify}
                                 onChange={handleArtistChange}
                             />

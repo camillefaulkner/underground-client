@@ -1,20 +1,140 @@
 .pendingRequestContainer {
-    margin-top: 2rem;
-    margin-left: 3rem;
+    margin-top: 4rem;
+    margin-left: 4rem;
 }
 
 .requestform {
     background-color: lightskyblue;
     padding: 1rem;
     width: max-content;
+    border-radius:39% 61% 70% 30% / 61% 29% 71% 39%;
 }
 
 .artistform {
     background-color: lightgreen;
     padding: 1rem;
+    border-radius:63% 37% 56% 44% / 25% 28% 72% 75%;
 }
 
 .venueform {
     background-color: lightcoral;
     padding: 1rem;
+    border-radius:73% 27% 57% 43% / 28% 67% 33% 72%;
 }
+
+.container1 {
+    margin-left: 5%;
+}
+
+.divrow {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.container2 {
+    margin-top: 7%;
+    margin-left: -12rem;
+}
+
+.container3 {
+    margin-top: 7%;
+    margin-left: 10%;
+}
+
+.container4 {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.requestsuccess {
+    margin-top: 12%;
+    margin-left: 40%;
+}
+
+li {
+    list-style: none;
+}
+
+.venueaddress {
+    width: 17rem;
+}
+
+.venueprivate {
+    margin-top: 0.5rem;
+}
+
+.pendingrequestitem {
+    background-color: orange;
+    padding: 1rem;
+    border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;
+    width: fit-content;
+}
+
+.requestartistlist {
+    margin-left: 5rem;
+}
+
+.requestartistinfo {
+    margin-left: 3rem;
+    margin-top: -1rem;
+}
+
+.categoryrow {
+    display: flex;
+    flex-direction: row;
+}
+
+.categoryrow2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.selectcategory {
+    margin-left: 2rem;
+}
+
+.newcategory {
+    margin-left: 5rem;
+    max-height: fit-content;
+}
+
+.requestapproval {
+    margin-left: 15rem;
+    margin-top: 2rem;
+}
+
+.approvebutton {
+    margin-top: 2rem;
+    margin-left: 1rem;
+    width: 80%;
+}
+
+.pendingrequestimg {
+    margin-left: 7rem;
+}
+
+.requestformsubmit {
+    width: 20rem;
+}
+
+.rainbow{
+    background-color: #343A40;
+    border-radius: 4px;  
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 16px;
+    width: 30rem;
+  }
+  
+  .rainbow-1:hover{
+     background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+     animation:slidebg 5s linear infinite;
+  }
+
+  @keyframes slidebg {
+    to {
+      background-position:20vw;
+    }
+  }

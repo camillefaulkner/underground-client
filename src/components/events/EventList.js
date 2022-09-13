@@ -7,9 +7,11 @@ import { getApprovedEvents, getEventsByCategory, getEventsByVenueArtist, getThis
 import { getAllSelectionsByUser, saveNewSelection } from "../../managers/ItineraryManager"
 import './Event.css'
 import { Map } from "../map/Map"
+import { ConvertTime } from "./ConvertTime"
 
 export const EventList = ({ selectionState, setSelectionState }) => {
     const [events, setEvents] = useState([])
+    const [dateList, setDateList] = useState([])
     const [showMap, setShowMap] = useState(false)
     const [selections, setSelections] = useState([])
     const [filteredEvents, setFiltered] = useState([])
@@ -22,11 +24,24 @@ export const EventList = ({ selectionState, setSelectionState }) => {
 
     useEffect(
         () => {
-            getApprovedEvents().then((evtArray) => { setEvents(evtArray) })
+            getApprovedEvents().then((evtArray) => { 
+                setEvents(evtArray) 
+            })
             getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelectionState(selectionArray) })
             getAllCategories().then((catArray) => { setCat(catArray) })
         }, []
     )
+
+    useEffect(
+        () => {
+            let dateSet = new Set()
+            events.map(e => {
+                dateSet.add(e.date)
+            })
+            setDateList(dateSet)
+        }, [events]
+    )
+
 
     useEffect(
         () => {
@@ -55,36 +70,39 @@ export const EventList = ({ selectionState, setSelectionState }) => {
         [chosenCategory, events]
     )
 
-    return <div style={{background:showMap  ? "none" : "#82b9e8"}} className="eventlistblob">
-        <div style={{background:showMap  ? "none" : "#a4bfea"}} className="eventlistblob2">
+    return <div style={{ background: showMap ? "none" : "#82b9e8" }} className="eventlistblob">
+        <div style={{ background: showMap ? "none" : "#a4bfea" }} className="eventlistblob2">
             {
                 showMap === false
                     ? <>
-                        <div className="searchBar">
-                            <input
-                                type="text"
-                                placeholder="search by venue or artist or event name ..."
-                                onChange={
-                                    (changeEvent) => {
-                                        let search = changeEvent.target.value
-                                        setSearchTerms(search)
+                        <div className="eventlistsearchrow">
+                            <div >
+                                <input
+                                    className="searchBar"
+                                    type="text"
+                                    placeholder="search by venue or artist or event name ..."
+                                    onChange={
+                                        (changeEvent) => {
+                                            let search = changeEvent.target.value
+                                            setSearchTerms(search)
+                                        }
                                     }
-                                }
-                            />
+                                />
+                            </div>
+                            <select className="categoryFilter" onChange={(event) => {
+                                let chosenCategory = event.target.value
+                                setChosenCategory(parseInt(chosenCategory))
+                            }}>
+                                <option value="0">Search by Category...</option>
+                                {cat.map(category => {
+                                    return <option value={`${category.id}`}>{category.category}</option>
+                                })}
+                            </select><br />
                         </div>
-                        <select className="categoryFilter" onChange={(event) => {
-                            let chosenCategory = event.target.value
-                            setChosenCategory(parseInt(chosenCategory))
-                        }}>
-                            <option value="0">Search by Category...</option>
-                            {cat.map(category => {
-                                return <option value={`${category.id}`}>{category.category}</option>
-                            })}
-                        </select><br />
-                        <button onClick={(clickEvent) => {
+                        <button className="eventsbutton" onClick={(clickEvent) => {
                             getThisWeekEvents().then((evtArray) => { setFiltered(evtArray) })
                         }}>view just week's worth</button>
-                        <button onClick={(clickEvent) => {
+                        <button className="eventsbutton" onClick={(clickEvent) => {
                             getApprovedEvents().then((evtArray) => { setFiltered(evtArray) })
                         }}>all events</button>
                     </>
@@ -102,31 +120,27 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                     <ul>
                         {
                             filteredEvents.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(evt => {
-                                return <div class="container">
-                                    <div class="product">
-                                        <div class="effect-1"></div>
-                                        <div class="effect-2"></div>
-                                        <div class="content">
+                                return <div className="container">
+                                    <div className="product">
+                                        <div className="content">
 
                                             <li className="eventCard" draggable="true">
-                                                {
-                                                    evt.image !== null
-                                                        ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
-                                                        : <></>
-                                                }
-                                                <Link to={`/events/${evt.id}`} style={{ textDecoration: 'none' }}> {ConvertDate(evt.date)} - {evt.name} - {evt.venue.name}</Link>
+                                                <Link to={`/events/${evt.id}`} style={{ textDecoration: 'none' }}> {ConvertDate(evt.date)} - {evt.name} - {evt.venue.name} {ConvertTime(evt.time)}</Link>
                                                 {
                                                     adminUser === "false"
                                                         ? <>
                                                             {
-                                                                selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
-                                                                    ? <button onClick={(clickEvent) => {
+                                                                selectionState.length === 0 || selectionState.filter(s => s.event.id === evt.id).length === 0
+                                                                    ? <button className="button-8" onClick={(clickEvent) => {
                                                                         clickEvent.preventDefault()
                                                                         saveNewSelection({
                                                                             event: evt.id,
                                                                             user: currentUserId
-                                                                        }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) }).then(() => setSelectionState(selections)))
-                                                                    }}>add</button>
+                                                                        }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => {
+                                                                            setSelections(selectionArray)
+                                                                            setSelectionState(selectionArray)
+                                                                        }))
+                                                                    }}>add to my list</button>
                                                                     : <>
                                                                     </>
                                                             }
@@ -135,10 +149,7 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                                                 }
                                             </li>
 
-                                            <div class="exercise"></div>
                                         </div>
-                                        <span class="title">
-                                        </span>
                                     </div>
                                 </div>
                             })

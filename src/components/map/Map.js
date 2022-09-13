@@ -60,7 +60,7 @@ export const Map = ({ adminUser, selections, saveNewSelection, currentUserId, se
         <div className='mapblob'>
             <div className='mapblob2'>
                 {dataForViz.length
-                    ? <MapContainer center={[36.17, -86.75]} zoom={11} scrollWheelZoom={false} >
+                    ? <MapContainer center={[36.17, -86.75]} zoom={11} scrollWheelZoom={true} >
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
