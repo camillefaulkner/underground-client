@@ -73,8 +73,8 @@ export const RequestList = () => {
                                                                     }
                                                                     {
                                                                         a.social !== null
-                                                                            ? <>social: <b>{a.social}</b><br /></>
-                                                                            : <>social: <b>no social submitted</b><br /></>
+                                                                            ? <>instagram: <b>{a.social}</b><br /></>
+                                                                            : <>instagram: <b>no social submitted</b><br /></>
                                                                     }
                                                                     {
                                                                         a.spotify !== null
@@ -92,6 +92,7 @@ export const RequestList = () => {
                                             : <></>
                                     }
                                     <br />
+                                    request from: <b>{evt.user.first_name} {evt.user.last_name} - {evt.user.email}</b> <br /><br />
                                     <div className="categoryrow">
                                         <label htmlFor="category_id" className="label">event category: </label>
                                         <div className="categoryrow2">
@@ -147,7 +148,7 @@ export const RequestList = () => {
                                             }
                                         </div>
                                     </div>
-                                    <button className="approvebutton" onClick={(clickEvent) => {
+                                    <button className="approvebutton rainbow-1 rainbow" onClick={(clickEvent) => {
                                         clickEvent.preventDefault()
                                         const newVenue = { ...evt.venue }
                                         newVenue.category = parseInt(venue)

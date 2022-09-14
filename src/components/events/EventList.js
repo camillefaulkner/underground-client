@@ -24,8 +24,8 @@ export const EventList = ({ selectionState, setSelectionState }) => {
 
     useEffect(
         () => {
-            getApprovedEvents().then((evtArray) => { 
-                setEvents(evtArray) 
+            getApprovedEvents().then((evtArray) => {
+                setEvents(evtArray)
             })
             getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelectionState(selectionArray) })
             getAllCategories().then((catArray) => { setCat(catArray) })
@@ -35,11 +35,12 @@ export const EventList = ({ selectionState, setSelectionState }) => {
     useEffect(
         () => {
             let dateSet = new Set()
-            events.map(e => {
+            filteredEvents.map(e => {
                 dateSet.add(e.date)
             })
-            setDateList(dateSet)
-        }, [events]
+            let sortedDates = Array.from(dateSet).sort((a, b) => { return new Date(a) - new Date(b) })
+            setDateList(sortedDates)
+        }, [filteredEvents]
     )
 
 
@@ -97,21 +98,27 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                                 {cat.map(category => {
                                     return <option value={`${category.id}`}>{category.category}</option>
                                 })}
-                            </select><br />
+                            </select>
+                            <button className="clearfilters button-8" onClick={(clickEvent) => {
+                                getApprovedEvents().then((evtArray) => {
+                                    setFiltered(evtArray)
+                                })
+                            }}>clear filters</button>
+                            <br />
                         </div>
-                        <button className="eventsbutton" onClick={(clickEvent) => {
+                        <button className="eventsbutton button-8" onClick={(clickEvent) => {
                             getThisWeekEvents().then((evtArray) => { setFiltered(evtArray) })
                         }}>view just week's worth</button>
-                        <button className="eventsbutton" onClick={(clickEvent) => {
+                        <button className="eventsbutton button-8" onClick={(clickEvent) => {
                             getApprovedEvents().then((evtArray) => { setFiltered(evtArray) })
                         }}>all events</button>
                     </>
-                    : <button onClick={(clickEvent) => {
+                    : <button className="button-8" onClick={(clickEvent) => {
                         setShowMap(false)
                     }}>event list </button>
 
             }
-            <button onClick={(clickEvent) => {
+            <button className="button-8" onClick={(clickEvent) => {
                 setShowMap(!showMap)
             }}>map view</button>
             {
@@ -119,41 +126,50 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                     ?
                     <ul>
                         {
-                            filteredEvents.sort((a, b) => { return new Date(a.date) - new Date(b.date) }).map(evt => {
-                                return <div className="container">
-                                    <div className="product">
-                                        <div className="content">
+                            dateList.map(d => {
+                                return <>{ConvertDate(d)}<br />
+                                    {
+                                        filteredEvents.map(evt => {
+                                            if (evt.date === d) {
+                                                return <div className="container">
+                                                    <div className="product">
+                                                        <div className="content">
 
-                                            <li className="eventCard" draggable="true">
-                                                <Link to={`/events/${evt.id}`} style={{ textDecoration: 'none' }}> {ConvertDate(evt.date)} - {evt.name} - {evt.venue.name} {ConvertTime(evt.time)}</Link>
-                                                {
-                                                    adminUser === "false"
-                                                        ? <>
-                                                            {
-                                                                selectionState.length === 0 || selectionState.filter(s => s.event.id === evt.id).length === 0
-                                                                    ? <button className="button-8" onClick={(clickEvent) => {
-                                                                        clickEvent.preventDefault()
-                                                                        saveNewSelection({
-                                                                            event: evt.id,
-                                                                            user: currentUserId
-                                                                        }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => {
-                                                                            setSelections(selectionArray)
-                                                                            setSelectionState(selectionArray)
-                                                                        }))
-                                                                    }}>add to my list</button>
-                                                                    : <>
-                                                                    </>
-                                                            }
-                                                        </>
-                                                        : <></>
-                                                }
-                                            </li>
+                                                            <li className="eventCard" draggable="true">
+                                                                <Link to={`/events/${evt.id}`} style={{ textDecoration: 'none' }}> {evt.name} <br /> {evt.venue.name} {ConvertTime(evt.time)}</Link>
+                                                                {
+                                                                    adminUser === "false"
+                                                                        ? <>
+                                                                            {
+                                                                                selectionState.length === 0 || selectionState.filter(s => s.event.id === evt.id).length === 0
+                                                                                    ? <button className="button-8" onClick={(clickEvent) => {
+                                                                                        clickEvent.preventDefault()
+                                                                                        saveNewSelection({
+                                                                                            event: evt.id,
+                                                                                            user: currentUserId
+                                                                                        }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => {
+                                                                                            setSelections(selectionArray)
+                                                                                            setSelectionState(selectionArray)
+                                                                                        }))
+                                                                                    }}>add to my list</button>
+                                                                                    : <>
+                                                                                    </>
+                                                                            }
+                                                                        </>
+                                                                        : <></>
+                                                                }
+                                                            </li>
 
-                                        </div>
-                                    </div>
-                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        })
+                                    }
+                                </>
                             })
                         }
+
                     </ul>
                     : <> < Map adminUser={adminUser} selections={selectionState} saveNewSelection={saveNewSelection} currentUserId={currentUserId} selectionState={selectionState} setSelectionState={setSelectionState} setSelections={setSelectionState} getAllSelectionsByUser={getAllSelectionsByUser} /></>
             }

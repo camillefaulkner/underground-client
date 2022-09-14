@@ -23,7 +23,7 @@
 }
 
 .container1 {
-    margin-left: 5%;
+    margin-left: 10%;
 }
 
 .divrow {
@@ -34,12 +34,12 @@
 
 .container2 {
     margin-top: 7%;
-    margin-left: -12rem;
+    margin-left: -18rem;
 }
 
 .container3 {
     margin-top: 7%;
-    margin-left: 10%;
+    margin-left: 7%;
 }
 
 .container4 {
@@ -66,7 +66,7 @@ li {
 }
 
 .pendingrequestitem {
-    background-color: orange;
+    background-color: #FFD580;
     padding: 1rem;
     border-radius: 39% 61% 65% 35% / 74% 65% 35% 26%;
     width: fit-content;

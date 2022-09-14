@@ -7,7 +7,7 @@ export const VenueEdit = ({ venue, setVenue, cat, setCat, venueForm, setVenueFor
     }
 
     return <>
-        <><div className="field">
+        <div><div className="field">
             <label htmlFor="title" className="label">name: </label>
             <div className="control">
                 <input type="text" name="name" required className="input"
@@ -62,6 +62,6 @@ export const VenueEdit = ({ venue, setVenue, cat, setCat, venueForm, setVenueFor
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     </>
 }

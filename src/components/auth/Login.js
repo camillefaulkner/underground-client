@@ -55,7 +55,7 @@ export const Login = ({ setToken, setUserId }) => {
 
             <div className="field is-grouped">
               <div className="control">
-                <button className="button is-link" type="submit" >submit</button>
+                <button className="button is-link button-8" type="submit" >submit</button>
               </div>
               <div className="control">
                 <Link to="/register" className="registerbutton">register</Link>

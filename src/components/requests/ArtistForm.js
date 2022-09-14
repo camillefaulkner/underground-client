@@ -1,3 +1,4 @@
+import { Button, Popover, Typography } from "@mui/material";
 import { useState } from "react";
 import { saveNewArtist, saveNewArtistConnection } from "../../managers/ArtistManager";
 
@@ -6,6 +7,7 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
     const [evt, setEvt] = useState({})
     const [artistPreview, setArtistPreview] = useState()
     const [artist, setArtist] = useState({})
+    const [open, setOpen] = useState(false)
 
     const createArtistUrlImageString = (event) => {
         getArtistBase64(event.target.files[0], (base64ImageString) => {
@@ -64,6 +66,7 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
                         <input type="hidden" name="image" value={evt.id} />
                     </div>
                 </div>
+                <br />
                 <label htmlFor="title" className="label">name: </label>
                 <div className="control">
                     <input type="text" name="name" required className="input"
@@ -73,8 +76,9 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
                     />
                 </div>
             </div>
+            <br />
             <div className="field">
-                <label htmlFor="title" className="label">instagram handle (no@): </label>
+                <label htmlFor="title" className="label">instagram handle (no @ symbol): </label>
                 <div className="control">
                     <input type="text" name="social" className="input"
                         placeholder="insta_handle"
@@ -83,8 +87,13 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
                     />
                 </div>
             </div>
+            <br />
             <div className="field">
                 <label htmlFor="title" className="label">spotify uri: </label>
+                <button onClick={(clickEvent) => {
+                    clickEvent.preventDefault()
+                    window.alert(`this field allows users to preview a clip of your stuff (as long as it exists on spotify)! this isn't a required field but is a fun one. \n\nhow to find your uri:\n1. go to spotify (on your computer) and find the absolute banger you'd like to share\n2. hover over the track and click those three dots ... all the way to the right\n3. click Share, then Embed Track\n4. you'll get a pop-up (i promise we're almost done),\n click Show Code at the bottom\n5. within all that mumbojumbo find src= and copy everything within the quotation marks ""\n6. slap that link in the form!\nyour uri should start with 'https' and end with 'generator'`)
+                }}>whats this?</button>
                 <div className="control">
                     <input type="text" name="spotify" className="input"
                         placeholder="uri link"
@@ -93,6 +102,7 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
                     />
                 </div>
             </div>
+            <br />
             <div className="field">
                 <label htmlFor="content" className="label">description: </label>
                 <div className="control">
@@ -106,11 +116,11 @@ export const ArtistForm = ({ fetchCalls, artistList, setArtistList, artistForm, 
                     </div>
                 </div>
             </div>
-            <button onClick={(clickEvent) => {
+            <button className="button-8" onClick={(clickEvent) => {
                 clickEvent.preventDefault()
                 handleArtistSubmit()
                 setArtistForm(false)
-            }}>save</button><button onClick={(clickEvent) => {
+            }}>add</button><button className="button-9" onClick={(clickEvent) => {
                 clickEvent.preventDefault()
                 setArtistForm(false)
             }}>cancel</button>

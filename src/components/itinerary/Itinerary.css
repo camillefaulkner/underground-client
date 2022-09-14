@@ -4,7 +4,9 @@
     /* background-color: blueviolet;  */
     padding: 1rem;
     border-radius:66% 34% 33% 67% / 65% 73% 27% 35%;
-    max-width: 40rem;
+    max-width: fit-content;
+    min-width: 40rem;
+    margin-left: -3rem;
 }
 
 .itinerarylist2 {
@@ -14,7 +16,7 @@
 }
 
 .ititem {
-    background-color: aquamarine;
+    background-color: #a1ffeb;
     border-radius: 10px;
     margin: 0.5rem;
     padding: 1rem;

@@ -23,23 +23,24 @@ export const Itinerary = ({ selectionState, setSelectionState }) => {
     return <div className="itinerarylist">
             <div className="itinerarylist2">
                 <h3>itinerary</h3>
+                <hr></hr>
                 {
                     events.length !== 0
                         ? <>
-                            <h3>saved selections</h3>
+                            <h3>saved selections:</h3>
                             {
                                 events.sort((a, b) => { return new Date(a.event.date) - new Date(b.event.date) }).map(e => {
-                                    return <div className="ititem">{ConvertDate(e.event.date)} - {e.event.name} - {ConvertTime(e.event.time)}
-                                        <button onClick={() => {
+                                    return <div className="ititem">{ConvertDate(e.event.date)} - {e.event.name} <br/>
+                                        <button className="button-8" onClick={() => {
                                             navigate(`/events/${e.event.id}`)
                                         }}>more details</button>
-                                        <button onClick={() => {
+                                        <button className="button-9" onClick={() => {
                                             deleteSelection(e.id)
                                                 .then(() => getAllSelectionsByUser(currentUserId).then((showArray) => {
                                                     setEvents(showArray)
                                                     setSelectionState(showArray)
                                                 }))
-                                        }}>delete</button><br /></div>
+                                        }}>remove from saved</button><br /></div>
                                 })
                             }
                         </>

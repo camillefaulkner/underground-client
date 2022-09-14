@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { demoteAdmin, getAllUsers, promoteAdmin } from "../../managers/UserManager"
+import "./User.css"
 
 export const UserList = () => {
     const [users, setUsers] = useState([])
@@ -12,14 +13,16 @@ export const UserList = () => {
     )
 
     return <>
-        <ul>
+        <ul className="usercontainer">
+            <h3>users</h3>
             {
                 users.map(u => {
-                    return <li>
+                    return <>
+                    <li className="userlist">
                         {u.first_name} {u.last_name}
                         {
                             u.is_staff === false && u.id !== currentUserId
-                                ? <button onClick={(clickEvent) => {
+                                ? <button className="promotedemote" onClick={(clickEvent) => {
                                     clickEvent.preventDefault()
                                     promoteAdmin(u).then(() => getAllUsers().then((userArray) => { setUsers(userArray) }))
                                 }}>promote to admin</button>
@@ -27,13 +30,15 @@ export const UserList = () => {
                         }
                         {
                             u.is_staff === true && u.id !== currentUserId
-                            ? <button onClick={(clickEvent) => {
+                            ? <button className="promotedemote" onClick={(clickEvent) => {
                                 clickEvent.preventDefault()
                                 demoteAdmin(u).then(() => getAllUsers().then((userArray) => { setUsers(userArray) }))
                             }}>remove admin privileges</button>
                             : <></>
                         }
                     </li>
+                    <br/>
+                    </>
                 })
             }
         </ul>

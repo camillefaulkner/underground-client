@@ -47,13 +47,13 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
     }
 
     return <>
-        <ul>
             {
-                artistList.length
+                artistList.length && showArtistEdit === 0 && showArtistForm === false
                     ? <>
                         <h3>performers:</h3>
                         {artistList.map(al => {
-                            return <li className="artistlistitem">{al.name}<br /><button onClick={(clickEvent) => {
+                            return <>
+                            <div className="artistlistitem">{al.name}<br /><button onClick={(clickEvent) => {
                                 clickEvent.preventDefault()
                                 setShowArtistForm(false)
                                 if (al.id !== "undefined") {
@@ -68,15 +68,15 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                             }}>edit</button><button onClick={(clickEvent) => {
                                 clickEvent.preventDefault()
                                 deleteArtist(evtId, al.id).then(fetchCalls)
-                            }}>delete</button></li>
+                            }}>delete</button></div></>
                         })
                         }
                     </>
                     : <></>
             }
-        </ul>
+            <br/>
         {
-            showArtistEdit === 0
+            showArtistEdit === 0 && showArtistForm === false
                 ? <button onClick={(clickEvent) => {
                     clickEvent.preventDefault()
                     setShowArtistForm(!showArtistForm)
@@ -86,19 +86,19 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
 
         {
             showArtistForm === true
-                ? <ArtistForm fetchCalls={fetchCalls} setArtistList={setArtistList} artistList={artistList} setArtistForm={setShowArtistForm} evtId={evtId} artistForm={showArtistForm}/>
+                ? <ArtistForm fetchCalls={fetchCalls} setArtistList={setArtistList} artistList={artistList} setArtistForm={setShowArtistForm} evtId={evtId} artistForm={showArtistForm} />
                 : <></>
         }
 
         {
-            showArtistEdit !== 0 
+            showArtistEdit !== 0
                 ? <>
                     <div className="field">
-                        {/* {
-                artistPreview
-                    ? <img src={artistPreview} style={{ width: '100px' }} />
-                    : <></>
-            } */}
+                        {
+                            artistPreview
+                                ? <img src={artistPreview} style={{ width: '100px' }} />
+                                : <></>
+                        }
                         <label htmlFor="title" className="label">name: </label>
                         <div className="control">
                             <input type="text" name="name" required className="input"
@@ -128,13 +128,13 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                             />
                         </div>
                     </div>
-                    {/* <div className="field">
-            <label htmlFor="image_url" className="label">artist photo: </label>
-            <div className="url-header">
-                <input type="file" id="url_image" onChange={createArtistUrlImageString} />
-                <input type="hidden" name="image" value={artist.image} />
-            </div>
-        </div> */}
+                    <div className="field">
+                        <label htmlFor="image_url" className="label">artist photo: </label>
+                        <div className="url-header">
+                            <input type="file" id="url_image" onChange={createArtistUrlImageString} />
+                            <input type="hidden" name="image" value={artist.image} />
+                        </div>
+                    </div>
                     <div className="field">
                         <label htmlFor="content" className="label">description: </label>
                         <div className="control">
@@ -149,9 +149,9 @@ export const ArtistEdit = ({ artistList, setArtistList, artist, setArtist, artis
                         </div>
                     </div>
                     <button onClick={(clickEvent) => {
-                    clickEvent.preventDefault()
-                    updateArtist(artist).then(setShowArtistEdit(0))
-                }}>save artist info</button>
+                        clickEvent.preventDefault()
+                        updateArtist(artist).then(setShowArtistEdit(0))
+                    }}>save artist info</button>
                 </>
                 : <></>
         }

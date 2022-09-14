@@ -10,7 +10,7 @@ import { ConvertTime } from '../events/ConvertTime';
 
 export const Map = ({ adminUser, selections, saveNewSelection, currentUserId, selectionState, setSelectionState, setSelections, getAllSelectionsByUser }) => {
     const [locations, setLocations] = useState([])
-    //setfiltered?
+    const [loading, setLoading] = useState(true)
     const [dataForViz, setDataForViz] = useState([])
 
     useEffect(
@@ -34,6 +34,9 @@ export const Map = ({ adminUser, selections, saveNewSelection, currentUserId, se
                         }
                         setDataForViz(newDataState)
                     })
+                    .then(() => {
+                        setLoading(false)
+                    })
             }
         },
         [locations]
@@ -56,58 +59,65 @@ export const Map = ({ adminUser, selections, saveNewSelection, currentUserId, se
 
 
     return <div className="map">
-        <h3>map</h3>
-        <div className='mapblob'>
-            <div className='mapblob2'>
-                {dataForViz.length
-                    ? <MapContainer center={[36.17, -86.75]} zoom={11} scrollWheelZoom={true} >
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        {dataForViz.map(data => {
-                            let foundLocation = locations.find((location) => {
-                                return location.venue.address.includes(data?.address.houseNumber)
-                            })
-                            return <>
-                                {
-                                    selections.length === 0 || selections.filter(s => s.event.id === foundLocation.id).length === 0
-                                        ? <Marker icon={blueIcon} position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
-                                            <Popup>
-                                                {ConvertDate(foundLocation?.date)} @ {ConvertTime(foundLocation?.time)}<br />
-                                                event name: {foundLocation?.name} <br />
-                                                where: {foundLocation?.venue.name} <br /> {foundLocation?.venue.address}
-                                                {
-                                                    adminUser === "false"
-                                                        ? <><br /><button onClick={(clickEvent) => {
-                                                            clickEvent.preventDefault()
-                                                            saveNewSelection({
-                                                                event: foundLocation.id,
-                                                                user: currentUserId
-                                                            }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => {
-                                                                setSelections(selectionArray)
-                                                                closePopup()
-                                                            }))
-                                                        }}>add to itinerary</button></>
-                                                        : <></>
-                                                }
-                                            </Popup>
-                                        </Marker>
-                                        : <Marker icon={greenIcon} position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
-                                            <Popup>
-                                                {ConvertDate(foundLocation?.date)} @ {ConvertTime(foundLocation?.time)}<br />
-                                                event name: {foundLocation?.name} <br />
-                                                where: {foundLocation?.venue.name} <br /> {foundLocation?.venue.address}
-                                            </Popup>
-                                        </Marker>
-                                }
-                            </>
-                        })
-                        }
-                    </MapContainer>
-                    : <></>
-                }
+        {loading
+            ? <div className="loader-container">
+                <div className="spinner"></div>
             </div>
-        </div>
+            : <>
+
+                <h3>map</h3>
+                <div className='mapblob'>
+                    <div className='mapblob2'>
+                        {dataForViz.length
+                            ? <MapContainer center={[36.17, -86.75]} zoom={11} scrollWheelZoom={true} >
+                                <TileLayer
+                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                {dataForViz.map(data => {
+                                    let foundLocation = locations.find((location) => {
+                                        return location.venue.address.includes(data?.address.houseNumber)
+                                    })
+                                    return <>
+                                        {
+                                            selections.length === 0 || selections.filter(s => s.event.id === foundLocation.id).length === 0
+                                                ? <Marker icon={blueIcon} position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
+                                                    <Popup>
+                                                        {ConvertDate(foundLocation?.date)} @ {ConvertTime(foundLocation?.time)}<br />
+                                                        <b>{foundLocation?.name}</b><br /><br/>
+                                                        where: {foundLocation?.venue.name} <br /> {foundLocation?.venue.address}<br/>
+                                                        {
+                                                            adminUser === "false"
+                                                                ? <><br /><button onClick={(clickEvent) => {
+                                                                    clickEvent.preventDefault()
+                                                                    saveNewSelection({
+                                                                        event: foundLocation.id,
+                                                                        user: currentUserId
+                                                                    }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => {
+                                                                        setSelections(selectionArray)
+                                                                        closePopup()
+                                                                    }))
+                                                                }}>add to itinerary</button></>
+                                                                : <></>
+                                                        }
+                                                    </Popup>
+                                                </Marker>
+                                                : <Marker icon={greenIcon} position={[data?.referencePosition?.latitude, data?.referencePosition?.longitude]}>
+                                                    <Popup>
+                                                        {ConvertDate(foundLocation?.date)} @ {ConvertTime(foundLocation?.time)}<br />
+                                                        event name: {foundLocation?.name} <br />
+                                                        where: {foundLocation?.venue.name} <br /> {foundLocation?.venue.address}
+                                                    </Popup>
+                                                </Marker>
+                                        }
+                                    </>
+                                })
+                                }
+                            </MapContainer>
+                            : <></>
+                        }
+                    </div>
+                </div>
+            </>}
     </div>
 }

@@ -24,14 +24,18 @@ export const EventDetails = () => {
     return <>
         <div className="eventdetailscontainer">
             <div className="eventDetails">
-                <button onClick={() => {
-                    navigate('/events')
-                }}>back</button>
-                {
-                    evt.image !== null
-                        ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
-                        : <></>
-                }
+                <div className="header">
+                    <button className="backbutton" onClick={() => {
+                        navigate('/events')
+                    }}>back</button>
+                    <div className="detailsimg">
+                    {
+                        evt.image !== null
+                            ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
+                            : <></>
+                    }
+                    </div>
+                </div>
                 <h3>{evt.name}</h3>
                 <hr></hr>
                 {

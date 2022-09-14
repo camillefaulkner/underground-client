@@ -55,21 +55,10 @@ export const EventEdit = () => {
         const dataToBeSaved = {
             venue: { ...venue },
             evt: { ...evt },
-            artists: [...artistList] 
+            artists: [...artistList]
         }
         updateEvent(dataToBeSaved).then(() => navigate(`/events/${evtId}`))
     }
-
-    // const handleArtistSubmit = () => {
-    //     const evtData = {
-    //         ...artist
-    //     }
-    //     let artistCopy = [...artistList]
-    //     artistCopy.push(evtData)
-    //     setArtistList(artistCopy)
-    //     setArtistForm(false)
-    //     setArtist({ image: '' })
-    // }
 
     const handleChange = (event) => {
         const newEvt = { ...evt }
@@ -82,29 +71,30 @@ export const EventEdit = () => {
 
             <div className="eventeditform">
                 <form style={{ width: "100%" }}>
-                    <div className="editpic">
-                        {
-                            preview
-                                ? <img src={preview} style={{ width: '200px' }} />
-                                : <></>
-                        }
-                        {
-                            evt.image !== null && evt.image?.startsWith('/media')
-                                ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
-                                : <></>
-                        }
-                        <div className="field">
-                            <label htmlFor="image_url" className="label">choose another event photo: </label>
-                            <div className="url-header">
-                                <input type="file" id="url_image" onChange={createUrlImageString} />
-                                <input type="hidden" name="image" value={evt.id} />
+                    <div className="middlerow">
+                        <div className="editpic">
+                            {
+                                preview
+                                    ? <img src={preview} style={{ width: '200px' }} />
+                                    : <></>
+                            }
+                            {
+                                evt.image !== null && evt.image?.startsWith('/media')
+                                    ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
+                                    : <></>
+                            }
+                            <div className="field">
+                                <label htmlFor="image_url" className="label">choose another event photo: </label>
+                                <div className="url-header">
+                                    <input type="file" id="url_image" onChange={createUrlImageString} />
+                                    <input type="hidden" name="image" value={evt.id} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <br />
+                        <br />
 
-                    <div className="middlerow">
-                        <div className="left">
+
+                        <div className="left requestform">
                             <div className="field">
                                 <h3>event</h3>
                                 <label htmlFor="title" className="label">title: </label>
@@ -155,12 +145,12 @@ export const EventEdit = () => {
                             </div>
                         </div>
 
-                        <div className="middle">
+                        <div className="middle venueform">
                             <h3>venue</h3>
                             < VenueEdit venue={venue} setVenue={setVenue} cat={cat} setCat={setCat} />
                         </div>
 
-                        <div className="right">
+                        <div className="right artistform">
                             <h3>artists</h3>
                             < ArtistEdit artistList={artistList} setArtistList={setArtistList} artist={artist} setArtist={setArtist} artistPreview={artistPreview} setArtistPreview={setArtistPreview} evtId={evtId} fetchCalls={fetchCalls} />
                         </div>
@@ -170,7 +160,7 @@ export const EventEdit = () => {
                         <div className="control">
                             <button type="submit"
                                 onClick={handleSubmit}
-                                className="button is-link">
+                                className="rainbow rainbow-1">
                                 Save
                             </button>
                         </div>

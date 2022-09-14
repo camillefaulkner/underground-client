@@ -17,7 +17,7 @@ export const RequestForm = () => {
     // const [venueForm, setVenueForm] = useState(true)
     const [venueName, setVenueName] = useState("")
     const [venue, setVenue] = useState({
-        private: false,
+        private: true,
         user: currentUserId
     })
 
@@ -50,7 +50,7 @@ export const RequestForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        if (venue.name === undefined || venue.address === undefined || evt.title === undefined || evt.date === undefined || evt.time === undefined || evt.description === undefined) {
+        if (venue.name === undefined || venue.address === undefined || evt.name === undefined || evt.date === undefined || evt.time === undefined || evt.description === undefined) {
             window.alert("please fill out required fields")
         } else {
             const dataToBeSaved = {
@@ -81,7 +81,7 @@ export const RequestForm = () => {
                     <form style={{ width: "100%" }}>
                         {
                             preview
-                                ? <img src={preview} style={{ width: '100px' }} />
+                                ? <img src={preview} style={{ width: '200px' }} />
                                 : <></>
                         }
                         <div className="field">
@@ -93,7 +93,7 @@ export const RequestForm = () => {
                         </div>
                         <br />
                         <div className="field">
-                            <label htmlFor="title" className="label">title: </label>
+                            <label htmlFor="title" className="label">*title: </label>
                             <div className="control">
                                 <input type="text" name="name" required className="input"
                                     placeholder="title"
@@ -104,7 +104,7 @@ export const RequestForm = () => {
                         </div>
                         <br />
                         <div className="field">
-                            <label htmlFor="title" className="label">date: </label>
+                            <label htmlFor="title" className="label">*date: </label>
                             <div className="control">
                                 <input type="date" name="date" required className="input"
                                     placeholder="Title"
@@ -115,7 +115,7 @@ export const RequestForm = () => {
                         </div>
                         <br />
                         <div className="field">
-                            <label htmlFor="title" className="label">time of event: </label>
+                            <label htmlFor="title" className="label">*time of event: </label>
                             <div className="control">
                                 <input type="time" name="time" required className="input"
                                     placeholder="Title"
@@ -126,7 +126,7 @@ export const RequestForm = () => {
                         </div>
                         <br /><br />
                         <div className="field">
-                            <label htmlFor="content" className="label">event description: </label>
+                            <label htmlFor="content" className="label">*event description: </label>
                             <div className="control">
                                 <div className="control">
                                     <textarea
@@ -158,55 +158,60 @@ export const RequestForm = () => {
 
             <div className="container3">
                 <h3>who</h3>
-                <ul>
-                    {
-                        artistList.length
-                            ?
-                            <>
-                                <h3>performers:</h3>
-                                {artistList.map(al => {
-                                    return <>{al.name}<br /></>
-                                })
-                                }
-                            </>
-                            : <></>
-                    }
-                </ul>
-                <button onClick={(clickEvent) => {
-                    clickEvent.preventDefault()
-                    setArtistForm(!artistForm)
-                }}>
-                    add performer/artist +</button>
                 {
-                    artistForm === true
+                    artistForm === false
                         ? <>
-                            <ArtistForm artistList={artistList} setArtistList={setArtistList} artistForm={artistForm} setArtistForm={setArtistForm} />
+                            {
+                                artistList.length
+                                    ?
+                                    <>
+                                        <h3>performers:</h3>
+                                        {artistList.map(al => {
+                                            return <>{al.name}<br /></>
+                                        })
+                                        }
+                                    </>
+                                    : <></>
+                            }
+                            <br />
+                            <button onClick={(clickEvent) => {
+                                clickEvent.preventDefault()
+                                setArtistForm(!artistForm)
+                            }}>
+                                add performer/artist +</button>
                         </>
-                        : <></>
+                        : <><ArtistForm artistList={artistList} setArtistList={setArtistList} artistForm={artistForm} setArtistForm={setArtistForm} /></>
                 }
             </div>
         </div>
 
-
-        <div className="container4">
-            <div className="field">
-                <div className="control">
-                    {/* <nav>
-                        <ul>
-                            <li onClick={handleSubmit}>
+        {
+            venue.name !== undefined && venue.address !== undefined && evt.name !== undefined && evt.date !== undefined && evt.time !== undefined && evt.description !== undefined
+                ?
+                <div className="container4">
+                    <div className="field">
+                        <div className="control">
+                            <button type="submit"
+                                onClick={handleSubmit}
+                                className="rainbow rainbow-1">
                                 save
-                                <span></span><span></span><span></span><span></span>
-                            </li>
-                        </ul>
-                    </nav> */}
-                    <button type="submit"
-                        onClick={handleSubmit}
-                        className="rainbow rainbow-1">
-                        save
-                    </button>
+                            </button>
 
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                : <div className="container4">
+                    <div className="field">
+                        <div className="control">
+                            <button type="submit"
+                                disabled={true}
+                                className="rainbow">
+                                save
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+        }
     </>
 }

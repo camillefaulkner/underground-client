@@ -32,27 +32,53 @@
 .middlerow {
   display: flex;
   flex-direction: row;
-  margin-left: 25%;
+  margin-left: 7%;
+  margin-top: 5%;
+}
+
+.left {
+  margin-left: 8%;
 }
 
 .middle {
-  margin-left: 15%;
+  margin-left: 8%;
 }
 
 .right {
-  margin-left: 12%;
+  margin-left: 8%;
 }
 
 .editpic {
   display: flex;
   flex-direction: column;
-  margin-left: 45%;
+  margin-top: 5%;
+  background-color: #CDB0EE;
+  border-radius: 25% 75% 70% 30% / 39% 50% 50% 61%;
+  padding: 2rem;
+}
+
+img {
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+.detailsimg {
+  display: flex;
+  justify-content: center;
+}
+
+.backbutton {
+  width: 4rem;
 }
 
 .editsave {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 5rem;
 }
 
 .eventlistblob {
@@ -97,6 +123,8 @@
   position: relative;
   margin: 20px auto;
   width: 27rem;
+  padding-top: 8px;
+  padding-bottom: 8px;
   background: #f0cfeb;
   /* z-index: 1; */
   border-radius: 75px;
@@ -113,6 +141,8 @@
 .eventdetailscontainer {
   display: flex;
   flex-direction: row;
+  margin-top: 3%;
+  margin-left: 5%;
 }
 
 .viz {
@@ -139,7 +169,7 @@
 
 .button-8 {
   background-color: #e1ecf4;
-  border-radius: 3px;
+  border-radius: 75px;
   border: 1px solid #7aa7c7;
   box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
   box-sizing: border-box;
@@ -151,6 +181,7 @@
   font-weight: 400;
   line-height: 1.15385;
   margin: 0;
+  margin-left: 1rem;
   outline: none;
   padding: 8px .8em;
   position: relative;
@@ -175,6 +206,54 @@
 
 .button-8:active {
   background-color: #a0c7e4;
+  box-shadow: none;
+  color: #2c5777;
+}
+
+.clearfilters {
+  margin-left: 1rem;
+}
+
+
+.button-9 {
+  background-color: lightgrey;
+  border-radius: 75px;
+  border: 1px solid #7aa7c7;
+  box-shadow: rgba(255, 255, 255, .7) 0 1px 0 0 inset;
+  box-sizing: border-box;
+  color: #39739d;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", "Liberation Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.15385;
+  margin: 0;
+  margin-left: 1rem;
+  outline: none;
+  padding: 8px .8em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.button-9:hover,
+.button-9:focus {
+  background-color: lightcoral;
+  color: #2c5777;
+}
+
+.button-9:focus {
+  box-shadow: 0 0 0 4px rgba(0, 149, 255, .15);
+}
+
+.button-9:active {
+  background-color: lightcoral;
   box-shadow: none;
   color: #2c5777;
 }
