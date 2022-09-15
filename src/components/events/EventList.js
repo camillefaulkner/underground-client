@@ -94,7 +94,7 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                                 let chosenCategory = event.target.value
                                 setChosenCategory(parseInt(chosenCategory))
                             }}>
-                                <option value="0">Search by Category...</option>
+                                <option value="0">search by a category...</option>
                                 {cat.map(category => {
                                     return <option value={`${category.id}`}>{category.category}</option>
                                 })}

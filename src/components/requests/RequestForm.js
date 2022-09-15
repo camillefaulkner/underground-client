@@ -174,7 +174,7 @@ export const RequestForm = () => {
                                     : <></>
                             }
                             <br />
-                            <button onClick={(clickEvent) => {
+                            <button className="button-8" onClick={(clickEvent) => {
                                 clickEvent.preventDefault()
                                 setArtistForm(!artistForm)
                             }}>

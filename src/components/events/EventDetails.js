@@ -5,7 +5,6 @@ import { ConvertDate } from "./ConvertDate"
 import { ConvertTime } from "./ConvertTime"
 import { getAllSelectionsByUser, saveNewSelection } from "../../managers/ItineraryManager"
 import './Event.css'
-import { Visual } from "../music/Visual"
 
 export const EventDetails = () => {
     const [evt, setEvt] = useState({})
@@ -111,10 +110,6 @@ export const EventDetails = () => {
                         </>
                 }
             </div>
-            {/* <div className="viz">
-            music visual
-            <Visual/>
-        </div> */}
         </div>
     </>
 }

@@ -7,6 +7,7 @@ import { EventEdit } from "../components/events/EventEdit"
 import { EventList } from "../components/events/EventList"
 import { Itinerary } from "../components/itinerary/Itinerary"
 import { Map } from "../components/map/Map"
+import { WebSocketDemo } from "../components/message/Message"
 import { RequestForm } from "../components/requests/RequestForm"
 import { RequestList } from "../components/requests/RequestList"
 import { RequestSubmitted } from "../components/requests/RequestSubmitted"
@@ -29,6 +30,7 @@ export const ApplicationViews = ({ token, setToken, setUserId, userId }) => {
       <Route path="/view-requests" element={< RequestList />} />
       <Route path="itinerary" element={< Itinerary />} />
       <Route path="/users" element={<UserList />} />
+      <Route path="/chat" element={<WebSocketDemo />} />
     </Route>
   </Routes>
 }

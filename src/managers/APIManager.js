@@ -1,7 +1,5 @@
 import { keys } from "./ApiKeys"
 
-
-
 export const fetchLatandLong = (address) => {
     let url = address
     let encode = encodeURIComponent(url)
