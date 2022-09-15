@@ -25,7 +25,7 @@ export const EventDetails = () => {
         <div className="eventdetailscontainer">
             <div className="eventDetails">
                 <div className="header">
-                    <button className="backbutton" onClick={() => {
+                    <button className="backbutton button-8" onClick={() => {
                         navigate('/events')
                     }}>back</button>
                     <div className="detailsimg">
@@ -45,7 +45,7 @@ export const EventDetails = () => {
                             {
                                 evt.artists?.map(a => {
                                     return <>{a.name}
-                                        <button className="checkemout" onClick={() => {
+                                        <button className="checkemout button-8" onClick={() => {
                                             if (showMusic === 0) {
                                                 setShowMusic(a.id)
                                             } else {
@@ -98,7 +98,7 @@ export const EventDetails = () => {
                             }}>delete show</button></>
                         : <>
                             {selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
-                                ? <button onClick={(clickEvent) => {
+                                ? <button className="button-8" onClick={(clickEvent) => {
                                     clickEvent.preventDefault()
                                     saveNewSelection({
                                         event: evt.id,
