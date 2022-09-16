@@ -108,7 +108,7 @@ export const EventList = ({ selectionState, setSelectionState }) => {
                         </div>
                         <button className="eventsbutton button-8" onClick={(clickEvent) => {
                             getThisWeekEvents().then((evtArray) => { setFiltered(evtArray) })
-                        }}>view just week's worth</button>
+                        }}>events happening this week</button>
                         <button className="eventsbutton button-8" onClick={(clickEvent) => {
                             getApprovedEvents().then((evtArray) => { setFiltered(evtArray) })
                         }}>all events</button>
