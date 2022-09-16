@@ -1,5 +1,5 @@
 export const saveNewSelection = (data) => {
-    return fetch(`http://localhost:8000/chosenshows`, {
+    return fetch(`https://cf-underground.herokuapp.com/chosenshows`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -11,7 +11,7 @@ export const saveNewSelection = (data) => {
 }
 
 export const getAllSelectionsByUser = (id) => {
-    return fetch(`http://localhost:8000/chosenshows?user=${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/chosenshows?user=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -21,7 +21,7 @@ export const getAllSelectionsByUser = (id) => {
 
 
 export const deleteSelection = (id) => {
-    return fetch(`http://localhost:8000/chosenshows/${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/chosenshows/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`

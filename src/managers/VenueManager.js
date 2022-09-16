@@ -1,5 +1,5 @@
 export const assignCategory = (venue) => {
-    return fetch(`http://localhost:8000/venues/${venue.id}/assign_category`, {
+    return fetch(`https://cf-underground.herokuapp.com/venues/${venue.id}/assign_category`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -10,7 +10,7 @@ export const assignCategory = (venue) => {
 }
 
 export const getAllVenues = () => {
-    return fetch('http://localhost:8000/venues?private=False', {
+    return fetch('https://cf-underground.herokuapp.com/venues?private=False', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -19,7 +19,7 @@ export const getAllVenues = () => {
 }
 
 export const getVenuesBySearch = (search) => {
-    return fetch(`http://localhost:8000/venues?private=False&q=${search}`, {
+    return fetch(`https://cf-underground.herokuapp.com/venues?private=False&q=${search}`, {
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`
       }

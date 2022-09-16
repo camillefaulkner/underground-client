@@ -1,5 +1,5 @@
 export const saveNewArtist = (artistObj) => {
-    return fetch(`http://localhost:8000/artists`, {
+    return fetch(`https://cf-underground.herokuapp.com/artists`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -11,7 +11,7 @@ export const saveNewArtist = (artistObj) => {
 }
 
 export const getSingleArtist = (id) => {
-    return fetch(`http://localhost:8000/artists/${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/artists/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -20,7 +20,7 @@ export const getSingleArtist = (id) => {
 }
 
 export const updateArtist= (artist) => {
-    return fetch(`http://localhost:8000/artists/${artist.id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/artists/${artist.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -31,7 +31,7 @@ export const updateArtist= (artist) => {
 }
 
 export const saveNewArtistConnection = (connectionObj) => {
-    return fetch(`http://localhost:8000/evtartist`, {
+    return fetch(`https://cf-underground.herokuapp.com/evtartist`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,

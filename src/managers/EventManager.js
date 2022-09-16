@@ -1,5 +1,5 @@
 export const getApprovedEvents = () => {
-    return fetch('http://localhost:8000/events?approved=True', {
+    return fetch('https://cf-underground.herokuapp.com/events?approved=True', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -8,7 +8,7 @@ export const getApprovedEvents = () => {
 }
 
 export const getPendingEvents = () => {
-    return fetch('http://localhost:8000/events?approved=False', {
+    return fetch('https://cf-underground.herokuapp.com/events?approved=False', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -18,7 +18,7 @@ export const getPendingEvents = () => {
 
 
 export const getSingleEvent = (id) => {
-    return fetch(`http://localhost:8000/events/${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -27,7 +27,7 @@ export const getSingleEvent = (id) => {
 }
 
 export const saveNewEvent = (data) => {
-    return fetch(`http://localhost:8000/events`, {
+    return fetch(`https://cf-underground.herokuapp.com/events`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -39,7 +39,7 @@ export const saveNewEvent = (data) => {
 }
 
 export const deleteEvent = (id) => {
-    return fetch(`http://localhost:8000/events/${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`
@@ -48,7 +48,7 @@ export const deleteEvent = (id) => {
   }
 
   export const deleteArtist = (EvtId, ArtistId) => {
-    return fetch(`http://localhost:8000/events/${EvtId}/delete_artist?artist=${ArtistId}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/${EvtId}/delete_artist?artist=${ArtistId}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`
@@ -57,7 +57,7 @@ export const deleteEvent = (id) => {
   }
 
 export const updateEvent = (event) => {
-    return fetch(`http://localhost:8000/events/${event.evt.id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/${event.evt.id}`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -68,7 +68,7 @@ export const updateEvent = (event) => {
 }
 
 export const approveEvent = (event) => {
-    return fetch(`http://localhost:8000/events/${event.id}/approve`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/${event.id}/approve`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -80,7 +80,7 @@ export const approveEvent = (event) => {
 
 
 export const getEventsByVenueArtist = (search) => {
-    return fetch(`http://localhost:8000/events?approved=True&q=${search}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events?approved=True&q=${search}`, {
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`
       }
@@ -89,7 +89,7 @@ export const getEventsByVenueArtist = (search) => {
 
 
 export const getEventsByCategory = (id) => {
-    return fetch(`http://localhost:8000/events?approved=True&category=${id}`, {
+    return fetch(`https://cf-underground.herokuapp.com/events?approved=True&category=${id}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -98,7 +98,7 @@ export const getEventsByCategory = (id) => {
 }
 
 export const getThisWeekEvents = () => {
-    return fetch(`http://localhost:8000/events/this_week?approved=True`, {
+    return fetch(`https://cf-underground.herokuapp.com/events/this_week?approved=True`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }

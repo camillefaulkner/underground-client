@@ -1,5 +1,5 @@
 export const getAllUsers = () => {
-    return fetch('http://localhost:8000/users', {
+    return fetch('https://cf-underground.herokuapp.com/users', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -8,7 +8,7 @@ export const getAllUsers = () => {
 }
 
 export const promoteAdmin = (user) => {
-    return fetch(`http://localhost:8000/users/${user.id}/admin`, {
+    return fetch(`https://cf-underground.herokuapp.com/users/${user.id}/admin`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
@@ -19,7 +19,7 @@ export const promoteAdmin = (user) => {
 }
 
 export const demoteAdmin = (user) => {
-    return fetch(`http://localhost:8000/users/${user.id}/demote`, {
+    return fetch(`https://cf-underground.herokuapp.com/users/${user.id}/demote`, {
         method: "PUT",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,

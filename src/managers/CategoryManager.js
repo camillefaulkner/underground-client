@@ -1,5 +1,5 @@
 export const getAllCategories = () => {
-    return fetch('http://localhost:8000/categories', {
+    return fetch('https://cf-underground.herokuapp.com/categories', {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
@@ -8,7 +8,7 @@ export const getAllCategories = () => {
 }
 
 export const saveNewCategory = (catObj) => {
-    return fetch(`http://localhost:8000/categories`, {
+    return fetch(`https://cf-underground.herokuapp.com/categories`, {
         method: "POST",
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`,
