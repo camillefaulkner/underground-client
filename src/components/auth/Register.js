@@ -52,7 +52,7 @@ export const Register = ({ setToken, setUserId }) => {
         </div>
 
         <div className="field">
-          <label className="label">last Name</label>
+          <label className="label">last name</label>
           <div className="control">
             <input className="input" type="text" ref={lastName} />
           </div>
