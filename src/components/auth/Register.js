@@ -71,7 +71,7 @@ export const Register = ({ setToken, setUserId }) => {
             <input className="input" type="email" ref={email} />
           </div>
         </div>
-
+        <br />
         <div className="field">
           <label className="label">password</label>
           <div className="field-body">
