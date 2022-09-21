@@ -2,16 +2,7 @@ import { saveNewCategory } from "../../managers/CategoryManager"
 import { getAllVenues, getVenuesBySearch } from "../../managers/VenueManager"
 import { useEffect, useState } from "react"
 import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 
-
-// function sleep(delay = 0) {
-//     return new Promise((resolve) => {
-//         setTimeout(resolve, delay);
-//     });
-// }
 
 export const VenueForm = ({ venue, setVenue, setVenueName }) => {
     const [searchTerms, setSearchTerms] = useState("")
