@@ -19,7 +19,7 @@ export const getAllVenues = () => {
 }
 
 export const getVenuesBySearch = (search) => {
-    return fetch(`http://localhost:8000/venues?private=False&q=${search}`, {
+    return fetch(`http://localhost:8000/venues/private_false?q=${search}`, {
       headers: {
         'Authorization': `Token ${localStorage.getItem('ug_token')}`
       }
