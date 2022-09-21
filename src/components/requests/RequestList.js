@@ -81,7 +81,11 @@ export const RequestList = () => {
                                                                             ? <>spotify preview: <iframe src={`${a.spotify}`} width="425" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media" /><br /></>
                                                                             : <>spotify preview: <b>no link submitted</b><br /></>
                                                                     }
-                                                                    artist description: <b>{a.description}</b> <br />
+                                                                                                                                        {
+                                                                        a.description !== null
+                                                                    ? <>artist description: <b>{a.description}</b> <br /></>
+                                                                    : <>artist description: <b>no description submitted</b><br /></>
+                                                                                                                                        }
                                                                 </div>
                                                                 : <></>
                                                         }

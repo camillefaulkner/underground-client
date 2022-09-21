@@ -29,11 +29,11 @@ export const EventDetails = () => {
                         navigate('/events')
                     }}>back</button>
                     <div className="detailsimg">
-                    {
-                        evt.image !== null
-                            ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
-                            : <></>
-                    }
+                        {
+                            evt.image !== null
+                                ? <img src={`http://localhost:8000${evt.image}`} style={{ width: '200px' }} />
+                                : <></>
+                        }
                     </div>
                 </div>
                 <h3>{evt.name}</h3>
@@ -60,61 +60,66 @@ export const EventDetails = () => {
                                                             ? <iframe src={`${a.spotify}`} width="425" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media" />
                                                             : <></>
                                                     }
-                                                    <><br />about: {a.description}</>
-                                                    {
-                                                        a.social !== null
-                                                            ? <a href={`https://www.instagram.com/${a.social}/`}><br />@{a.social}</a>
-                                                            : <></>
-                                                    }
-                                                </>
-                                                : <></>
+                                                    <br />
+                                                        {
+                                                            a.description !== null
+                                                                ? <>about: {a.description}</>
+                                                                : <>we dont have a description for this artist</>
+                                                        }
+                                                        {
+                                                            a.social !== null
+                                                                ? <a href={`https://www.instagram.com/${a.social}/`}><br />@{a.social}</a>
+                                                                : <></>
+                                                        }
+                                                    </>
+                                                    : <></>
                                         }
-                                        <br /></>
+                                                    <br /></>
                                 })
                             }
-                        </>
+                                    </>
                         : <></>
                 }
-                <hr></hr>
-                {
-                    evt.time
-                        ? <p>{ConvertDate(evt.date)} at {ConvertTime(evt.time)}</p>
-                        : <></>
-                }
-                <p>where: {evt.venue?.name}</p>
-                <p>address: {evt.venue?.address}</p>
-                <hr></hr>
-                <p>about: {evt.description}</p>
-
-                {
-                    adminUser === "true"
-                        ? <><button onClick={(clickEvent) => {
-                            clickEvent.preventDefault()
-                            navigate(`/event-edit/${evt.id}`)
-                        }}>edit</button>
-                            <button onClick={() => {
-                                deleteEvent(evtId)
-                                    .then(() => navigate('/events'))
-                            }}>delete show</button></>
-                        : <>
-                            {selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
-                                ? <button className="button-8" onClick={(clickEvent) => {
-                                    clickEvent.preventDefault()
-                                    saveNewSelection({
-                                        event: evt.id,
-                                        user: currentUserId
-                                    }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) }).then(() => navigate('/events')))
-                                }}>add to list</button>
-                                : <></>
+                            <hr></hr>
+                            {
+                                evt.time
+                                    ? <p>{ConvertDate(evt.date)} at {ConvertTime(evt.time)}</p>
+                                    : <></>
                             }
+                            <p>where: {evt.venue?.name}</p>
+                            <p>address: {evt.venue?.address}</p>
+                            <hr></hr>
+                            <p>about: {evt.description}</p>
 
-                        </>
-                }
-            </div>
+                            {
+                                adminUser === "true"
+                                    ? <><button onClick={(clickEvent) => {
+                                        clickEvent.preventDefault()
+                                        navigate(`/event-edit/${evt.id}`)
+                                    }}>edit</button>
+                                        <button onClick={() => {
+                                            deleteEvent(evtId)
+                                                .then(() => navigate('/events'))
+                                        }}>delete show</button></>
+                                    : <>
+                                        {selections.length === 0 || selections.filter(s => s.event.id === evt.id).length === 0
+                                            ? <button className="button-8" onClick={(clickEvent) => {
+                                                clickEvent.preventDefault()
+                                                saveNewSelection({
+                                                    event: evt.id,
+                                                    user: currentUserId
+                                                }).then(() => getAllSelectionsByUser(currentUserId).then((selectionArray) => { setSelections(selectionArray) }).then(() => navigate('/events')))
+                                            }}>add to list</button>
+                                            : <></>
+                                        }
+
+                                    </>
+                            }
+                        </div>
             {/* <div className="viz">
             music visual
             <Visual/>
         </div> */}
-        </div>
-    </>
+            </div>
+        </>
 }

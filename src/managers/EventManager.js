@@ -98,7 +98,7 @@ export const getEventsByCategory = (id) => {
 }
 
 export const getThisWeekEvents = () => {
-    return fetch(`http://localhost:8000/events?approved=True&this_week`, {
+    return fetch(`http://localhost:8000/events/this_week?approved=True`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("ug_token")}`
         }
